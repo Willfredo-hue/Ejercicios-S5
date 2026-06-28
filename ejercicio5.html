@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Desafío: Piedra, Papel o Tijera</title>
+</head>
+<body>
+    <h2>Juego: Piedra, Papel o Tijera</h2>
+    <button onclick="comenzarJuego()">¡Empezar a Jugar!</button>
+
+    <script>
+        function comenzarJuego() {
+            let totalRondas = parseInt(prompt("¿Cuántas rondas deseas jugar?"));
+            
+            if (isNaN(totalRondas) || totalRondas <= 0) {
+                alert("Por favor, introduce un número de rondas válido.");
+                return;
+            }
+
+            let rondaActual = 1;
+            let puntosUsuario = 0;
+            let puntosPC = 0;
+            const opciones = ["piedra", "papel", "tijera"];
+
+            while (rondaActual <= totalRondas) {
+                let jugadaUsuario = prompt(`Ronda ${rondaActual} de ${totalRondas}\nElige: Piedra, Papel o Tijera`).trim().toLowerCase();
+
+                if (!opciones.includes(jugadaUsuario)) {
+                    alert("Jugada no válida. Intenta de nuevo esta ronda.");
+                    continue; // Repite la ronda si escribe cualquier cosa
+                }
+
+                // Jugada de la computadora aleatoria
+                let jugadaPC = opciones[Math.floor(Math.random() * 3)];
+                let ganadorRonda = "";
+
+                // Lógica de quién gana la ronda
+                if (jugadaUsuario === jugadaPC) {
+                    ganadorRonda = "Empate";
+                } else if (
+                    (jugadaUsuario === "piedra" && jugadaPC === "tijera") ||
+                    (jugadaUsuario === "papel" && jugadaPC === "piedra") ||
+                    (jugadaUsuario === "tijera" && jugadaPC === "papel")
+                ) {
+                    ganadorRonda = "Jugador";
+                    puntosUsuario++;
+                } else {
+                    ganadorRonda = "Computadora";
+                    puntosPC++;
+                }
+
+                // Formatear textos para el mensaje
+                let uText = jugadaUsuario.charAt(0).toUpperCase() + jugadaUsuario.slice(1);
+                let pcText = jugadaPC.charAt(0).toUpperCase() + jugadaPC.slice(1);
+                let resultadoTexto = ganadorRonda === "Empate" ? "¡Esta ronda es un Empate!" : `Ganador de la ronda: ${ganadorRonda}`;
+
+                // Mostrar el estado actual tal como pide el ejemplo
+                alert(
+                    `Ronda: ${rondaActual} de ${totalRondas}\n` +
+                    `Jugador: ${uText}\n` +
+                    `Computadora: ${pcText}\n\n` +
+                    `${resultadoTexto}\n\n` +
+                    `Puntaje parcial:\nJugador: ${puntosUsuario} - Computadora: ${puntosPC}\n` +
+                    `Rondas restantes: ${totalRondas - rondaActual}`
+                );
+
+                rondaActual++;
+            }
+
+            // Resultado Final
+            let mensajeFinal = `--- FIN DEL JUEGO ---\nPuntaje Final:\nJugador: ${puntosUsuario}\nComputadora: ${puntosPC}\n\n`;
+            if (puntosUsuario > puntosPC) {
+                mensajeFinal += "¡Felicidades! Has ganado el juego. 🏆";
+            } else if (puntosPC > puntosUsuario) {
+                mensajeFinal += "La computadora gana el juego. ¡Suerte la próxima! 🤖";
+            } else {
+                mensajeFinal += "El juego ha terminado en un empate absoluto. 🤝";
+            }
+
+            alert(mensajeFinal);
+        }
+    </script>
+</body>
+</html>

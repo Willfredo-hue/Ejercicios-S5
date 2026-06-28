@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 4: Grupo de Letras</title>
+</head>
+<body>
+    <h2>Clasificador de Letras</h2>
+    <input type="text" id="letra" maxlength="1" placeholder="Ingresa una letra">
+    <button onclick="clasificarLetra()">Clasificar</button>
+    <p id="resultado4"></p>
+
+    <script>
+        function clasificarLetra() {
+            const letra = document.getElementById('letra').value.trim().toLowerCase();
+            const resultado = document.getElementById('resultado4');
+
+            if (letra.length !== 1 || !/[a-z]/.test(letra)) {
+                resultado.innerText = "Por favor, ingresa una sola letra válida.";
+                return;
+            }
+
+            const grupoA = ['a', 'e', 'i', 'o', 'u'];
+            const grupoB = ['b', 'c', 'd', 'f', 'g'];
+            const grupoC = ['h', 'j', 'k', 'l', 'm'];
+            const grupoD = ['n', 'p', 'q', 'r'];
+            const grupoE = ['s', 't', 'v', 'w', 'x', 'y', 'z'];
+
+            if (grupoA.includes(letra)) {
+                resultado.innerText = `La letra '${letra}' pertenece al Grupo A.`;
+            } else if (grupoB.includes(letra)) {
+                resultado.innerText = `La letra '${letra}' pertenece al Grupo B.`;
+            } else if (grupoC.includes(letra)) {
+                resultado.innerText = `La letra '${letra}' pertenece al Grupo C.`;
+            } else if (grupoD.includes(letra)) {
+                resultado.innerText = `La letra '${letra}' pertenece al Grupo D.`;
+            } else if (grupoE.includes(letra)) {
+                resultado.innerText = `La letra '${letra}' pertenece al Grupo E.`;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 3: Estado del Examen</title>
+</head>
+<body>
+    <h2>Estado del Examen</h2>
+    <input type="number" step="0.1" id="nota" placeholder="Ingresa la nota">
+    <button onclick="evaluarExamen()">Evaluar</button>
+    <p id="resultado3"></p>
+
+    <script>
+        function evaluarExamen() {
+            const nota = parseFloat(document.getElementById('nota').value);
+            const resultado = document.getElementById('resultado3');
+
+            if (isNaN(nota) || nota < 0 || nota > 10) {
+                resultado.innerText = "Por favor, ingresa una nota válida entre 0 y 10.";
+                return;
+            }
+
+            if (nota > 7) {
+                resultado.innerText = "¡Examen APROBADO! 😎";
+            } else if (nota >= 4) {
+                resultado.innerText = "Debes RECUPERAR. 📝";
+            } else {
+                resultado.innerText = "Es un APLAZO. ❌";
+            }
+        }
+    </script>
+</body>
+</html>
